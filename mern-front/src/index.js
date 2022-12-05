@@ -13,14 +13,14 @@ import store from "./redux/store";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
 root.render(
-  <React.StrictMode>
-    <CssBaseline />
-    <ThemeProvider theme={theme}>
+  <>
+      <CssBaseline />
+      <ThemeProvider theme={theme}>
         <BrowserRouter>
-            <Provider store={store}>
-                <App />
-            </Provider>
+          <Provider store={store}>
+              <App />
+          </Provider>
         </BrowserRouter>
-    </ThemeProvider>
-  </React.StrictMode>
+      </ThemeProvider>
+  </>
 );
