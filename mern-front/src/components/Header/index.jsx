@@ -5,17 +5,18 @@ import Button from '@mui/material/Button';
 
 import styles from './Header.module.scss';
 import Container from '@mui/material/Container';
-import { selectIsAuth } from '../../redux/slices/auth';
+import { logout, selectIsAuth } from '../../redux/slices/auth';
 
 
 export const Header = () => {
   const dispatch = useDispatch();
-
   const isAuth = useSelector(selectIsAuth);
 
   const onClickLogout = () => {
-      if( window.confirm('Вы действительно хотите выйти'))
-      dispatch(logout());
+      if(window.confirm('Вы действительно хотите выйти')) {
+        dispatch(logout());
+        window.localStorage.removeItem('token');
+      }
   };
 
   return (
@@ -23,12 +24,12 @@ export const Header = () => {
       <Container maxWidth="lg">
         <div className={styles.inner}>
           <Link className={styles.logo} to="/">
-            <div> ISAEV BLOG</div>
+            <div>ISAEV BLOG</div>
           </Link>
           <div className={styles.buttons}>
             {isAuth ? (
               <>
-                <Link to="/posts/create">
+                <Link to="/add-post">
                   <Button variant="contained">Написать статью</Button>
                 </Link>
                 <Button onClick={onClickLogout} variant="contained" color="error">
